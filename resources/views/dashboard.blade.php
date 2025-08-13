@@ -78,7 +78,7 @@
                     <div class="px-4">
                         <div class="circle-rounde-logo bg-success-subtle">
                             <i class="fa fa-dollar-sign"></i>
-                        </div>D0ng0000!
+                        </div>
                     </div>
                     <div>
                         <p class="text-start h3 logo-text-warning fw-bold mb-0">Rp. {{ $fee }}</p>
