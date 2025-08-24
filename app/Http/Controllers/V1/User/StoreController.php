@@ -27,7 +27,7 @@ class StoreController extends Controller
         return $request->wantsJson() || $request->ajax()
             ? $this->repository->call($request)
             : view('admin.store', [
-                'groups' => $groupRepository->list(),
+                'groups' => $groupRepository->listByUserId($request),
             ]);
     }
 

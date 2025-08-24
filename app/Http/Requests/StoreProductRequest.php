@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Store;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreProductRequest extends FormRequest
@@ -11,7 +12,11 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        $store = Store::whereHas('groups', function ($query) {
+            $query->where('groups.user_id', $this->user()->id);
+        })->where('id', $this->store_id)->first();
+        
+        return $store ? true : false;
     }
 
     /**
@@ -22,7 +27,13 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|string|max:128',
+            'sku' => 'required|string|max:128',
+            'sku_ref' => 'required|string|max:128',
+            'variant' => 'required|string|max:128',
+            'price_selling' => 'required|numeric',
+            'price_cost' => 'required|numeric',
+            'quantity' => 'required|numeric|max:50000',
         ];
     }
 }

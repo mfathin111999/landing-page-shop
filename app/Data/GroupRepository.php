@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Data;
 
@@ -17,11 +17,17 @@ class GroupRepository
 
     public function query($request)
     {
-        return $this->model->
-            select('groups.*', 'users.name as owner_name')
+        return $this->model->select('groups.*', 'users.name as owner_name')
             ->leftJoin('users', 'users.id', '=', 'groups.user_id')
             ->when(!$request->user()->hasRole('superadmin'), function ($query) use ($request) {
-                return $query->where('groups.user_id', $request->user()->id);
+                $query->where('groups.user_id', $request->user()->id);
             });
+    }
+
+    public function listByUserId ($request) {
+        return $this->model->select('groups.*')
+            ->leftJoin('users', 'users.id', '=', 'groups.user_id')
+            ->where('users.id', $request->user()->id)
+            ->pluck('name', 'id');
     }
 }

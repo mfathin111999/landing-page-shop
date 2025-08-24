@@ -40,10 +40,10 @@ Route::prefix('admin')->middleware(['auth', 'role:superadmin|owner|member'])->gr
 });
 
 Route::prefix('admin')->middleware(['auth', 'role:superadmin'])->group(function () {
-    Route::resource('master/store', AdminStoreController::class);
-    Route::resource('master/order', AdminOrderController::class);
-    Route::resource('master/income', AdminIncomeController::class);
-    Route::resource('master/product', AdminProductController::class);
-    Route::resource('master/group', AdminGroupController::class);
-    Route::resource('master/user', AdminUserController::class);
+    Route::resource('master-store', AdminStoreController::class);
+    Route::resource('master-order', AdminOrderController::class);
+    Route::resource('master-income', AdminIncomeController::class);
+    Route::resource('master-product', AdminProductController::class);
+    Route::resource('master-group', AdminGroupController::class);
+    Route::resource('master-user', AdminUserController::class);
 });

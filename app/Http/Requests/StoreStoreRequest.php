@@ -11,7 +11,7 @@ class StoreStoreRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name" => 'required|string|max:100',
+            'group_id' => 'nullable|exists:groups,id',
         ];
     }
 }
